@@ -1,0 +1,9 @@
+version: "2.21"
+
+services:
+  app:
+    build: .
+    container_name: chess-pdf-server
+    image: chess-pdf-server
+    ports:
+      - "5000:5000"

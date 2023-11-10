@@ -1,0 +1,20 @@
+{
+  "description": "Response for successful operation",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "PDF generated successfully"
+          }
+        }
+      }
+    }
+  }
+}

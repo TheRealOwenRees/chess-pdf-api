@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chess PDF API",
+    "description": "Chess PDF API",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Localhost"
+    }
+  ],
+  "paths": {
+    "/api/v1/pdf": {
+      "post": {
+        "summary": "Create PDF",
+        "description": "Create PDF",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "pgn",
+                  "diagrams"
+                ],
+                "properties": {
+                  "pgn": {
+                    "type": "string",
+                    "example": "[Event \"URS-chJ\"]\n[Site \"Kherson\"]\n[Date \"1991.??.??\"]\n[Round \"?\"]\n[White \"Ibragimov, Ildar\"]\n[Black \"Kramnik, Vladimir\"]\n[Result \"0-1\"]\n[ECO \"A88\"]\n[WhiteElo \"2455\"]\n[BlackElo \"2480\"]\n[PlyCount \"110\"]\n[EventDate \"1991.??.??\"]\n[Source \"ChessBase\"]\n\n1. d4 {A88: Dutch Defence: Leningrad System: 5 Nf3 0-0 6 0-0 d6 7 Nc3 c6} 1...\nd6 2. c4 f5 3. Nf3 Nf6 4. g3 g6 0-1\n"
+                  },
+                  "diagrams": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "ply",
+                        "fen"
+                      ],
+                      "properties": {
+                        "ply": {
+                          "type": "number",
+                          "example": 6
+                        },
+                        "fen": {
+                          "type": "string",
+                          "example": "rnbqkb1r/ppp1p1pp/3p1n2/5p2/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 2 4"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response for successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "PDF generated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "PDF generation failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

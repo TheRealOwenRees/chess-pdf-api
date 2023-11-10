@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.0",
+    "info": {
+        "title": "Chess PDF API",
+        "description": "Chess PDF API",
+        "version": "0.0.1"
+    },
+  "paths": {
+    "/api/v1/pdf": {
+      "post": {
+        "summary": "Create PDF",
+        "description": "Create PDF",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schemas/pdf.json"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "./responses/success.json"
+          },
+          "400": {
+            "$ref": "./responses/badRequest.json"
+          },
+          "500": {
+            "$ref": "./responses/internalError.json"
+          }
+        }
+      }
+    }
+  }
+}
