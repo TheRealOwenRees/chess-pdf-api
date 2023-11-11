@@ -6,6 +6,20 @@
         "version": "0.0.1"
     },
   "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Health check",
+        "responses": {
+          "200": {
+            "$ref": "./responses/success.json"
+          },
+          "500": {
+              "$ref": "./responses/internalError.json"
+          }
+        }
+      }
+    },
     "/api/v1/pdf": {
       "post": {
         "summary": "Create PDF",
