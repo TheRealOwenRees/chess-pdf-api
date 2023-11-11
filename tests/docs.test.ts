@@ -15,7 +15,7 @@ describe('Test the API documentation route', () => {
     await expect(apiDefinition(apiDocs)).rejects.toThrowError()
   })
   test('test docs endpoint', async () => {
-    const response = await api.get('/docs')
-    expect(response).toBeTruthy()
+    const response = await api.get('/')
+    expect(response).toBeTruthy() // TODO test for HTML / docs
   })
 })
