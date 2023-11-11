@@ -17,9 +17,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // routes
-app.use('/api/v1/pdf', pdfRouter)
-app.use('/docs', apiDocsRouter)
+app.use('/', apiDocsRouter)
 app.use('/health', healthRouter)
+app.use('/api/v1/pdf', pdfRouter)
 
 // error handlers
 app.use(unknownEndpoint)
