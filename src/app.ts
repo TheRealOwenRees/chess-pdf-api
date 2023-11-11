@@ -4,7 +4,8 @@ import cors from 'cors'
 import { corsOptions } from './utils/config'
 
 import pdfRouter from './routes/pdf'
-import apiDocs from './routes/docs'
+import apiDocsRouter from './routes/docs'
+import healthRouter from './routes/health'
 import { unknownEndpoint, serverError } from './middleware/errorHandlers'
 
 const app: Express = express()
@@ -17,7 +18,8 @@ app.use(express.urlencoded({ extended: true }))
 
 // routes
 app.use('/api/v1/pdf', pdfRouter)
-app.use('/docs', apiDocs)
+app.use('/docs', apiDocsRouter)
+app.use('/health', healthRouter)
 
 // error handlers
 app.use(unknownEndpoint)

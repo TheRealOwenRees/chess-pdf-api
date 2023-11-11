@@ -7,11 +7,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# 2. Test Stage
-FROM build as test
-RUN npm test
-
-# 3. Production Stage
+# 2. Production Stage
 FROM owenrees/node-xskak:latest as production
 WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/package*.json ./

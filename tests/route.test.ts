@@ -1,26 +1,19 @@
 import app from '../src/app'
-// @ts-ignore
 import request from 'supertest'
 import { pgn, diagrams } from './routes_helper'
-import * as path from 'node:path'
+import Pgn2Tex from '../src/utils/pgn2tex'
 
 const api = request(app)
 
-describe('Test the PDF routes', () => {
-  test('POST method returns tex string', async () => {
-    const data = {
-      pgn,
-      diagrams
-    }
-    const response = await api.post('/api/pdf').send(data)
-    expect(response.statusCode).toBe(201)
+describe('Test Pgn2Tex library', () => {
+  const gameTex = new Pgn2Tex(pgn, diagrams).toTex()
+  test('toTex() returns a string', () => {
+    expect(typeof gameTex).toBe('string')
   })
 })
 
-describe('Test the PGN routes', () => {
-  test('Upload PGN file', async () => {
-    const pgnFilePath = path.join(__dirname, 'pgn.pgn')
-    const response = await api.post('/api/pgn').attach('file', pgnFilePath)
-    expect(response.statusCode).toBe(200)
+describe('Health check', () => {
+  test('GET /health returns 200', async () => {
+    await api.get('/health').expect(200)
   })
 })

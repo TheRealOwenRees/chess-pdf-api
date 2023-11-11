@@ -1,20 +1,29 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import swaggerUi from 'swagger-ui-express'
 import SwaggerParser from '@apidevtools/swagger-parser'
-import path from 'path'
 
 const router = Router()
 
-const apiDefinition = async () => {
+export const apiDefinition = async (apiDocs: string) => {
   const parser = new SwaggerParser()
-  return await parser.validate(path.join(__dirname, '../../docs/openapi.json'))
+  try {
+    return await parser.validate(apiDocs)
+  } catch (error) {
+    console.log(error)
+    throw Error('API documentation not found')
+  }
 }
 
 router.use('/', swaggerUi.serve)
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  const openapi = await apiDefinition()
-  swaggerUi.setup(openapi)(req, res, next)
+  try {
+    const apiDocs = 'docs/openapi.json'
+    const openapi = await apiDefinition(apiDocs)
+    swaggerUi.setup(openapi)(req, res, next)
+  } catch (error) {
+    res.status(404).json({ type: 'error', message: 'API documentation not found' })
+  }
 })
 
 export default router
