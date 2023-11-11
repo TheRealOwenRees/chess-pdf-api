@@ -9,7 +9,8 @@
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
     "docs:debug": "swagger-cli validate -d docs/index.json",
-    "docs:generate": "npm run docs:debug && swagger-cli bundle docs/index.json --outfile docs/openapi.json"
+    "docs:generate": "npm run docs:debug && swagger-cli bundle docs/index.json --outfile docs/openapi.json",
+    "lint": "eslint --ext .ts src --fix"
   },
   "keywords": [],
   "author": "",
