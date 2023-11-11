@@ -34,4 +34,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            cd /home/${{ secrets.USERNAME }}/chess-pdf-api
+            git pull
             ls -la
