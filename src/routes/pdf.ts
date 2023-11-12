@@ -18,13 +18,16 @@ router.post('/', (req: Request, res: Response) => {
 
     pdf.on('error', (err) => {
       logger.error(err)
-      res.status(400).json({ type: 'error', message: 'PDF generation failed' })
+      throw new Error('PDF generation failed')
     })
-    pdf.on('finish', () => logger.info('PDF Generated'))
 
-    res.setHeader('Content-Disposition', 'inline')
-    res.setHeader('Content-Type', 'application/pdf')
-    pdf.pipe(res)
+    pdf.on('finish', () => {
+      logger.info('PDF Generated')
+      res.setHeader('Content-Disposition', 'inline')
+      res.setHeader('Content-Type', 'application/pdf')
+      res.status(201)
+      pdf.pipe(res)
+    })
   } catch (error) {
     res.status(500).json({ type: 'error', message: 'Something went wrong' })
   }
