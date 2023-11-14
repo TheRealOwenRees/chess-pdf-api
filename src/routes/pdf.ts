@@ -9,6 +9,7 @@ const router = Router()
 
 router.post('/', (req: Request, res: Response) => {
   const { pgn, diagrams } = req.body
+
   try {
     const gameTex = new Pgn2Tex(pgn, diagrams).toTex()
     const texFile = strStream(gameTex)
@@ -23,11 +24,12 @@ router.post('/', (req: Request, res: Response) => {
 
     pdf.on('finish', () => {
       logger.info('PDF Generated')
-      res.setHeader('Content-Disposition', 'inline')
-      res.setHeader('Content-Type', 'application/pdf')
-      res.status(201)
-      pdf.pipe(res)
     })
+
+    res.setHeader('Content-Disposition', 'inline')
+    res.setHeader('Content-Type', 'application/pdf')
+    res.status(201)
+    pdf.pipe(res)
   } catch (error) {
     res.status(500).json({ type: 'error', message: 'Something went wrong' })
   }
