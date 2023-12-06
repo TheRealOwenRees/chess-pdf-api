@@ -1,14 +1,16 @@
 import app from '../src/app'
 import request from 'supertest'
 import { pgn, diagrams } from './routes_helper'
-import Pgn2Tex from '../src/utils/pgn2tex'
+import Pgn2Tex from '@owenrees/pgn2tex'
 
 const api = request(app)
 
 describe('Test Pgn2Tex library', () => {
-  const gameTex = new Pgn2Tex(pgn, diagrams).toTex()
+  const instance = new Pgn2Tex(pgn, diagrams)
+  const gameTex = instance.toTex()
   test('toTex() returns a string', () => {
     expect(typeof gameTex).toBe('string')
+    console.log(gameTex)
   })
 })
 

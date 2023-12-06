@@ -2,7 +2,8 @@ import { Router, Request, Response } from 'express'
 import strStream from 'string-to-stream'
 import latex from 'node-latex'
 
-import Pgn2Tex from '../utils/pgn2tex'
+import Pgn2Tex from '@owenrees/pgn2tex'
+
 import logger from '../utils/logger'
 
 const router = Router()

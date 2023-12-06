@@ -13,7 +13,7 @@ This is not currently available as a public API, but this is currently being wor
 #### Check health status of API
 
 ```http
-    GET /health
+GET /health
 ```
 ```json
 {
@@ -26,7 +26,7 @@ This is not currently available as a public API, but this is currently being wor
 #### Generate PDF
 
 ```http
-    POST /api/v1/pdf
+POST /api/v1/pdf
 ```
 
 | Parameter  | Type     | Description                                                                                                                                                                                          |
