@@ -9,10 +9,10 @@ import logger from '../utils/logger'
 const router = Router()
 
 router.post('/', (req: Request, res: Response) => {
-  const { pgn, diagrams } = req.body
+  const { pgn, diagrams, diagramClock } = req.body
 
   try {
-    const gameTex = new Pgn2Tex(pgn, diagrams).toTex()
+    const gameTex = new Pgn2Tex(pgn, diagrams, diagramClock).toTex()
     const texFile = strStream(gameTex)
 
     // @ts-ignore
