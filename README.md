@@ -29,10 +29,11 @@ GET /health
 POST /api/v1/pdf
 ```
 
-| Parameter  | Type     | Description                                                                                                                                                                                          |
-|:-----------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `pgn`      | `string` | **Required**. A valid PGN of a chess game.                                                                                                                                                           |
-| `diagrams` | `array`  | An array of objects, containing:<br/> - `ply`(integer): The move ply for a chess diagram.<br/> - `fen`(string): A FEN of the board position, for rendering the correct diagram at the ply specified. |
+| Parameter      | Type      | Description                                                                                                                                                                                          |
+|:---------------|:----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pgn`          | `string`  | **Required**. A valid PGN of a chess game.                                                                                                                                                           |
+| `diagrams`     | `array`   | An array of objects, containing:<br/> - `ply`(integer): The move ply for a chess diagram.<br/> - `fen`(string): A FEN of the board position, for rendering the correct diagram at the ply specified. |
+| `diagramClock` | `boolean` | Display move times above and below the chessboard.                                                                                                                                                   |                                                                                                                                                  |
 
 ### Example
 ```json
@@ -47,7 +48,8 @@ POST /api/v1/pdf
       "ply": 10,
       "fen": "rnbqkb1r/pp2p1pp/2pp1n2/5p2/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 6"
     }
-  ]
+  ],
+  "diagramClock": false
 }
 ```
 
