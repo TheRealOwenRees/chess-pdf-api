@@ -91,6 +91,9 @@
                         }
                       }
                     }
+                  },
+                  "diagramClock": {
+                    "type": "boolean"
                   }
                 }
               }
