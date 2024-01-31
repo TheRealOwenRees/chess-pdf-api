@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // routes
 app.use('/', apiDocsRouter)
-app.use('/health', healthRouter)
+app.use('/api/v1/health', healthRouter)
 app.use('/api/v1/pdf', pdfRouter)
 
 // error handlers
