@@ -6,7 +6,7 @@
     "version": "0.0.1"
   },
   "paths": {
-    "/health": {
+    "/api/v1/health": {
       "get": {
         "summary": "Health Check",
         "description": "Health check",
@@ -102,7 +102,7 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/paths/~1health/get/responses/200"
+            "$ref": "#/paths/~1api~1v1~1health/get/responses/200"
           },
           "400": {
             "description": "Response for bad request",
@@ -125,7 +125,7 @@
             }
           },
           "500": {
-            "$ref": "#/paths/~1health/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1health/get/responses/500"
           }
         }
       }
