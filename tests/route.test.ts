@@ -16,6 +16,6 @@ describe('Test Pgn2Tex library', () => {
 
 describe('Health check', () => {
   test('GET /health returns 200', async () => {
-    await api.get('/health').expect(200)
+    await api.get('/api/v1/health').expect(200)
   })
 })
