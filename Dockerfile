@@ -6,6 +6,7 @@ COPY ./docs/openapi.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
+# RUN npm run test
 
 # 2. Production Stage
 FROM owenrees/node-xskak:latest as production
