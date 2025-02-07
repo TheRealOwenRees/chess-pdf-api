@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   GH_USER: therealowenrees
-  IMAGE_NAME: ${{ env.GH_USER }}/chess-pdf-api:latest
+  IMAGE_NAME: therealowenrees/chess-pdf-api:latest
 
 jobs:
   publish:
