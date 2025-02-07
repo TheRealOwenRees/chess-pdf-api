@@ -4,32 +4,34 @@ on:
   push:
     branches: [ main ]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.actor }}/chess-pdf-api:latest
+
 jobs:
-  build:
+  publish:
+    name: publish image
     runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Login to Github Container Registry
+        run: echo "${{ secrets.GHCR_SECRET }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build image and publish
+        run: |
+          docker build . -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Linting
-        run: npm run lint
+  deploy:
+    needs: publish
+    name: deploy image
+    runs-on: ubuntu-24.04
 
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm run test
-
-      - name: Deploy to production
+    steps:
+      - name: Connect and pull image from GHCR
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -37,7 +39,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/${{ secrets.USERNAME }}/chess-pdf-api
-            git pull
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker compose down
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker compose up --build -d
+            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker run -d -p 5000:5000 --name chess-pdf-api --env-file /home/${{ secrets.USERNAME }}/chess-pdf-api/.env ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
