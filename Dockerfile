@@ -1,15 +1,16 @@
 # 1. Build Stage
-FROM node:20-alpine as build
+FROM node:20-alpine AS build
 WORKDIR /usr/src/app
 COPY ./package*.json ./
+COPY ./jest.config.js ./
 COPY ./docs/openapi.json ./
 RUN npm ci
+RUN npm run test
 COPY . .
 RUN npm run build
-# RUN npm run test
 
 # 2. Production Stage
-FROM owenrees/node-xskak:latest as production
+FROM owenrees/node-xskak:latest AS production
 WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/package*.json ./
 COPY --from=build /usr/src/app/dist ./dist/

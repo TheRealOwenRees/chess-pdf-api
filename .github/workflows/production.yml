@@ -41,4 +41,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker run -d -p 5000:5000 --name chess-pdf-api --env-file /home/${{ secrets.USERNAME }}/chess-pdf-api/.env ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            cd /home/${{ secrets.USERNAME }}/chess-pdf-api
+            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker-compose up -d
+#            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker run -d -p 5000:5000 --name chess-pdf-api --env-file /home/${{ secrets.USERNAME }}/chess-pdf-api/.env ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}

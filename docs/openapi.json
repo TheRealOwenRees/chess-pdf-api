@@ -12,44 +12,10 @@
         "description": "Health check",
         "responses": {
           "200": {
-            "description": "Response for successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "example": "success"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "success message"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/paths/~1api~1v1~1pdf/post/responses/200"
           },
           "500": {
-            "description": "Response for internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Internal server error"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/paths/~1api~1v1~1pdf/post/responses/500"
           }
         }
       }
@@ -102,7 +68,24 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/paths/~1api~1v1~1health/get/responses/200"
+            "description": "Response for successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success message"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Response for bad request",
@@ -125,7 +108,24 @@
             }
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1health/get/responses/500"
+            "description": "Response for internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

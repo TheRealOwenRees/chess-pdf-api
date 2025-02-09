@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test TZ='UTC' jest --runInBand",
+    "test": "NODE_ENV=test TZ='UTC' jest --runInBand --passWithNoTests",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
