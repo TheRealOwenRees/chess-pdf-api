@@ -40,7 +40,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
             cd /home/${{ secrets.USERNAME }}/chess-pdf-api
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker compose down
+            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker compose up --build -d
