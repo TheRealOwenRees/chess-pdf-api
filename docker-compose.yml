@@ -4,5 +4,7 @@ services:
     container_name: chess-pdf-server
     restart: unless-stopped
     image: chess-pdf-server
+    ports:
+      - "5000:5000"
     environment:
       - DISCORD_ERROR_LOG_WEBHOOK=${DISCORD_ERROR_LOG_WEBHOOK}

@@ -1,5 +1,5 @@
 # 1. Build Stage
-FROM node:20-alpine AS build
+FROM node:20.19.1-alpine3.20 AS build
 WORKDIR /usr/src/app
 COPY ./package*.json ./
 COPY ./jest.config.js ./
@@ -16,4 +16,5 @@ COPY --from=build /usr/src/app/package*.json ./
 COPY --from=build /usr/src/app/dist ./dist/
 COPY --from=build /usr/src/app/docs/openapi.json ./docs/
 RUN npm ci --omit=dev
+EXPOSE 5000
 CMD ["npm", "run", "start"]
