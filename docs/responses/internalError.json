@@ -4,17 +4,17 @@
     "application/json": {
       "schema": {
         "type": "object",
-       "properties": {
-         "type": {
+        "properties": {
+          "type": {
             "type": "string",
             "example": "error"
           },
-        "message": {
-         "type": "string",
+          "message": {
+            "type": "string",
             "example": "Internal server error"
           }
         }
-     }
-   }
+      }
+    }
   }
 }

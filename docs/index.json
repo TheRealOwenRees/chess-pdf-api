@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.0",
-    "info": {
-        "title": "Chess PDF API",
-        "description": "Chess PDF API",
-        "version": "0.0.1"
-    },
+  "info": {
+    "title": "Chess PDF API",
+    "description": "Chess PDF API",
+    "version": "0.0.1"
+  },
   "paths": {
     "/api/v1/health": {
       "get": {
@@ -15,7 +15,7 @@
             "$ref": "./responses/success.json"
           },
           "500": {
-              "$ref": "./responses/internalError.json"
+            "$ref": "./responses/internalError.json"
           }
         }
       }

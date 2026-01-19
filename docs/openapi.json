@@ -29,10 +29,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "pgn",
-                  "diagrams"
-                ],
+                "required": ["pgn", "diagrams"],
                 "properties": {
                   "pgn": {
                     "type": "string",
@@ -42,10 +39,7 @@
                     "type": "array",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "ply",
-                        "fen"
-                      ],
+                      "required": ["ply", "fen"],
                       "properties": {
                         "ply": {
                           "type": "number",
