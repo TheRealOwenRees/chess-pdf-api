@@ -10,7 +10,6 @@ describe('Test Pgn2Tex library', () => {
   const gameTex = instance.toTex()
   test('toTex() returns a string', () => {
     expect(typeof gameTex).toBe('string')
-    console.log(gameTex)
   })
 })
 

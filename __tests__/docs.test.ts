@@ -12,7 +12,7 @@ describe('Test the API documentation route', () => {
   })
   test('should handle and throw an error for an invalid API definition file', async () => {
     const apiDocs = 'openapi.json'
-    await expect(apiDefinition(apiDocs)).rejects.toThrowError()
+    await expect(apiDefinition(apiDocs)).rejects.toThrow()
   })
   test('test docs endpoint', async () => {
     const response = await api.get('/')

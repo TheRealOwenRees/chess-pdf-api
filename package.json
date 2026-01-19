@@ -10,7 +10,7 @@
     "lint:quiet": "eslint . --quiet",
     "lint:strict": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --ext .ts --fix",
-    "test": "NODE_ENV=test TZ='UTC' jest --runInBand --passWithNoTests",
+    "test": "NODE_ENV=test TZ='UTC' jest --runInBand",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
