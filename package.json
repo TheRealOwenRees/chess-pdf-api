@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "lint": "eslint . --ext .ts",
+    "lint:quiet": "eslint . --quiet",
+    "lint:strict": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --ext .ts --fix",
     "test": "NODE_ENV=test TZ='UTC' jest --runInBand --passWithNoTests",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
     "docs:debug": "swagger-cli validate -d docs/index.json",
     "docs:generate": "npm run docs:debug && swagger-cli bundle docs/index.json --outfile docs/openapi.json",
-    "lint": "eslint --ext .ts src --fix"
+    "check": "npm run prettier && npm run lint && npm run test && npm run build"
   },
   "keywords": [],
   "author": "",
