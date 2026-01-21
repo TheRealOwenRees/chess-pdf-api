@@ -1,12 +1,12 @@
 # 1. Build Stage
-FROM node:20.19.1-alpine3.20 AS build
+FROM node:20.20.0-alpine3.23 AS build
 WORKDIR /usr/src/app
 COPY ./package*.json ./
 COPY ./jest.config.js ./
 COPY ./docs/openapi.json ./
 RUN npm ci
-RUN npm run test
 COPY . .
+RUN npm run test
 RUN npm run build
 
 # 2. Production Stage

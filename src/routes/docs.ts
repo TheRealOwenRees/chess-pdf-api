@@ -8,8 +8,7 @@ export const apiDefinition = async (apiDocs: string) => {
   const parser = new SwaggerParser()
   try {
     return await parser.validate(apiDocs)
-  } catch (error) {
-    console.log(error)
+  } catch {
     throw Error('API documentation not found')
   }
 }
@@ -21,7 +20,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const apiDocs = 'docs/openapi.json'
     const openapi = await apiDefinition(apiDocs)
     swaggerUi.setup(openapi)(req, res, next)
-  } catch (error) {
+  } catch {
     res.status(404).json({ type: 'error', message: 'API documentation not found' })
   }
 })

@@ -11,8 +11,8 @@ describe('Test the API documentation route', () => {
     expect(typeof response).toBe('object')
   })
   test('should handle and throw an error for an invalid API definition file', async () => {
-    const apiDocs = 'openapi.json'
-    await expect(apiDefinition(apiDocs)).rejects.toThrowError()
+    const apiDocs = 'non-existent-file.json'
+    await expect(apiDefinition(apiDocs)).rejects.toThrow()
   })
   test('test docs endpoint', async () => {
     const response = await api.get('/')
