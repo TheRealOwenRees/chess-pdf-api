@@ -26,7 +26,7 @@
     "@apidevtools/swagger-parser": "^10.1.0",
     "@mliebelt/pgn-parser": "^1.4.12",
     "@owenrees/pgn2tex": "^0.2.2",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
     "helmet": "^7.1.0",
