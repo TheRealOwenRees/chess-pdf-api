@@ -1,6 +1,6 @@
 {
   "name": "server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,6 @@
     "@apidevtools/swagger-cli": "^4.0.4",
     "@apidevtools/swagger-parser": "^10.1.0",
     "@mliebelt/pgn-parser": "^1.4.12",
-    "@owenrees/pgn2tex": "^0.2.2",
     "cors": "^2.8.6",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
