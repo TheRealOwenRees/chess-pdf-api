@@ -1,7 +1,8 @@
 export const stripPreambleFromTex = (texString: string) => {
   return texString
-    .replace(/\\documentclass.*/, '')
-    .replace(/\\usepackage.*/, '')
-    .replace(/\\geometry.*/, '')
-    .replace(/\\setlength.*/, '')
+    .replace(/\\documentclass(?:\[.*?\])?\{.*?\}/g, '')
+    .replace(/\\usepackage(?:\[.*?\])?\{.*?\}/g, '')
+    .replace(/\\geometry\{.*?\}/g, '')
+    .replace(/\\setlength\{.*?\}.*?\{.*?\}/g, '') // setlength has two sets of braces
+    .trim()
 }

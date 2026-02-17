@@ -4,11 +4,14 @@ import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import { spawn } from 'node:child_process'
+import { stripPreambleFromTex } from '../utils/preamble'
 
 const router = Router()
 
 router.post('/', async (req: Request, res: Response) => {
   const { texString } = req.body
+
+  const texStringWithoutPreamble = stripPreambleFromTex(texString)
 
   const tempId = Date.now()
   const tempDir = os.tmpdir()
@@ -16,9 +19,15 @@ router.post('/', async (req: Request, res: Response) => {
   const pdfFilePath = path.join(tempDir, `game-${tempId}.pdf`)
 
   try {
-    fs.writeFileSync(texFilePath, texString)
+    fs.writeFileSync(texFilePath, texStringWithoutPreamble)
 
-    const process = spawn('pdflatex', ['-interaction=nonstopmode', `-output-directory=${tempDir}`, texFilePath])
+    const process = spawn('pdflatex', [
+      '-fmt',
+      '/usr/src/app/preambles/chess',
+      '-interaction=nonstopmode',
+      `-output-directory=${tempDir}`,
+      texFilePath
+    ])
 
     process.on('close', async () => {
       if (fs.existsSync(pdfFilePath)) {
