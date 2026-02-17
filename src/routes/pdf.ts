@@ -1,5 +1,4 @@
 import { Router, Request, Response } from 'express'
-import Pgn2Tex from '@owenrees/pgn2tex'
 import logger from '../utils/logger'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -9,16 +8,15 @@ import { spawn } from 'node:child_process'
 const router = Router()
 
 router.post('/', async (req: Request, res: Response) => {
-  const { pgn, diagrams, diagramClock } = req.body
+  const { texString } = req.body
+
   const tempId = Date.now()
   const tempDir = os.tmpdir()
   const texFilePath = path.join(tempDir, `game-${tempId}.tex`)
   const pdfFilePath = path.join(tempDir, `game-${tempId}.pdf`)
 
   try {
-    const gameTex = new Pgn2Tex(pgn, diagrams, diagramClock).toTex()
-
-    fs.writeFileSync(texFilePath, gameTex)
+    fs.writeFileSync(texFilePath, texString)
 
     const process = spawn('pdflatex', ['-interaction=nonstopmode', `-output-directory=${tempDir}`, texFilePath])
 
