@@ -5,10 +5,13 @@ import path from 'node:path'
 import os from 'node:os'
 import { spawn } from 'node:child_process'
 import { stripPreambleFromTex } from '../utils/preamble'
+import { recordMetrics } from '../utils/metrics'
 
 const router = Router()
 
 router.post('/', async (req: Request, res: Response) => {
+  const startMs = Date.now()
+
   const { texString } = req.body
 
   const texStringWithoutPreamble = stripPreambleFromTex(texString)
@@ -44,22 +47,30 @@ router.post('/', async (req: Request, res: Response) => {
               if (fs.existsSync(f)) fs.unlinkSync(f)
             }
           )
+
+          recordMetrics('SUCCESS', startMs)
         })
       } else {
-        res.status(500).json({ type: 'error', message: 'PDF generation failed' })
+        const error = new Error('PDF generation failed')
+        recordMetrics('FAIL', startMs, error)
+        res.status(500).json({ type: 'error', message: error.message })
       }
     })
 
     process.on('error', async (error) => {
+      recordMetrics('FAIL', startMs, error)
       logger.error(error.message)
       await logger.discord({ type: 'error', message: error.message })
     })
   } catch (error) {
     if (error instanceof Error) {
+      recordMetrics('FAIL', startMs, error)
       logger.error(error.message)
     } else {
+      const error = new Error('Unknown Error')
+      recordMetrics('FAIL', startMs, error)
       logger.error('Unknown Error')
-      await logger.discord({ type: 'error', message: 'Unknown Error' })
+      await logger.discord({ type: 'error', message: error.message })
     }
   }
 })
