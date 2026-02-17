@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 COPY ./package*.json ./
 COPY ./jest.config.js ./
 COPY ./docs/openapi.json ./
+COPY ./preambles ./
 RUN npm ci
 COPY . .
 RUN npm run test
@@ -16,6 +17,8 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/package*.json ./
 COPY --from=build /usr/src/app/dist ./dist/
 COPY --from=build /usr/src/app/docs/openapi.json ./docs/
+COPY --from=build /usr/src/app/preambles ./preambles
 RUN npm ci --omit=dev
+RUN npm run preamble:generate
 EXPOSE 5000
 CMD ["npm", "run", "start"]
