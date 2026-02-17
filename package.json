@@ -11,6 +11,7 @@
     "lint:strict": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "NODE_ENV=test TZ='UTC' jest --runInBand",
+    "test:watch": "NODE_ENV=test TZ='UTC' jest --runInBand --watch",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
