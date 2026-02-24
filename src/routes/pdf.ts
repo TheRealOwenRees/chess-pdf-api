@@ -6,15 +6,16 @@ import os from 'node:os'
 import { spawn } from 'node:child_process'
 import { stripPreambleFromTex } from '../utils/preamble'
 import { recordMetrics } from '../utils/metrics'
+import Pgn2Tex from '@owenrees/pgn2tex'
 
 const router = Router()
 
 router.post('/', async (req: Request, res: Response) => {
   const startMs = Date.now()
 
-  const { texString } = req.body
+  const { pgn, diagrams, diagramClock } = req.body
 
-  const texStringWithoutPreamble = stripPreambleFromTex(texString)
+  // const texStringWithoutPreamble = stripPreambleFromTex(texString)
 
   const tempId = Date.now()
   const tempDir = os.tmpdir()
@@ -22,7 +23,10 @@ router.post('/', async (req: Request, res: Response) => {
   const pdfFilePath = path.join(tempDir, `game-${tempId}.pdf`)
 
   try {
-    fs.writeFileSync(texFilePath, texStringWithoutPreamble)
+    const gameTex = new Pgn2Tex(pgn, diagrams, diagramClock).toTex()
+    const gameTexWithoutPreamble = stripPreambleFromTex(gameTex)
+
+    fs.writeFileSync(texFilePath, gameTexWithoutPreamble)
 
     const process = spawn('pdflatex', [
       '-fmt',
