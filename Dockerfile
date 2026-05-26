@@ -6,7 +6,6 @@ COPY ./package*.json ./
 COPY ./jest.config.js ./
 COPY ./docs/openapi.json ./
 COPY ./preambles ./
-COPY ./pgn2tex.cjs ./
 RUN npm ci
 COPY . .
 RUN npm run test
@@ -19,7 +18,6 @@ COPY --from=build /usr/src/app/package*.json ./
 COPY --from=build /usr/src/app/dist ./dist/
 COPY --from=build /usr/src/app/docs/openapi.json ./docs/
 COPY --from=build /usr/src/app/preambles ./preambles
-COPY --from=build /usr/src/app/pgn2tex.cjs ./
 RUN npm ci --omit=dev
 
 # is the pdflatex command needed on build?

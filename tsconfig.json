@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true
   },
-  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./pgn2tex.cjs"],
-  "exclude": ["node_modules", "__tests__/**/*.ts"]
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+  "exclude": ["node_modules", "__tests__/**/*.ts", "./src/vendor/**/*"]
 }

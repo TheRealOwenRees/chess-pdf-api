@@ -10,7 +10,7 @@ import os from 'node:os'
 import { spawn } from 'node:child_process'
 import { recordMetrics } from '../utils/metrics'
 
-import * as pgnParser from '../../pgn2tex.cjs'
+import * as pgnParser from '../vendor/pgn2tex.cjs'
 const pgn2tex = pgnParser as IPgnParser
 
 const router = Router()
