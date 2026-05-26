@@ -8,7 +8,6 @@ import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import { spawn } from 'node:child_process'
-import { stripPreambleFromTex } from '../utils/preamble'
 import { recordMetrics } from '../utils/metrics'
 
 import * as pgnParser from '../../pgn2tex.cjs'
@@ -30,11 +29,10 @@ router.post('/', async (req: Request, res: Response) => {
   try {
     const diagramsString = JSON.stringify(diagrams)
 
-    // TODO check if OCaml parser emits preamble
+    // Pgn2Tex library does not include the preamble
     const gameTex = pgn2tex.convert(pgn, diagramsString, diagramClock)
-    const gameTexWithoutPreamble = stripPreambleFromTex(gameTex)
 
-    fs.writeFileSync(texFilePath, gameTexWithoutPreamble)
+    fs.writeFileSync(texFilePath, gameTex)
 
     const process = spawn('pdflatex', [
       '-fmt',
