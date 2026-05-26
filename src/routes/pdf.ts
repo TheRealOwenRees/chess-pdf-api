@@ -6,7 +6,9 @@ import os from 'node:os'
 import { spawn } from 'node:child_process'
 import { stripPreambleFromTex } from '../utils/preamble'
 import { recordMetrics } from '../utils/metrics'
-import Pgn2Tex from '@owenrees/pgn2tex'
+
+import * as pgnParser from '../../pgn2tex.cjs'
+const pgn2tex = pgnParser as any
 
 const router = Router()
 
@@ -15,16 +17,22 @@ router.post('/', async (req: Request, res: Response) => {
 
   const { pgn, diagrams, diagramClock } = req.body
 
-  // const texStringWithoutPreamble = stripPreambleFromTex(texString)
-
   const tempId = Date.now()
   const tempDir = os.tmpdir()
+
   const texFilePath = path.join(tempDir, `game-${tempId}.tex`)
   const pdfFilePath = path.join(tempDir, `game-${tempId}.pdf`)
 
   try {
-    const gameTex = new Pgn2Tex(pgn, diagrams, diagramClock).toTex()
+    console.log('DIAGRAMS: ', diagrams)
+    console.log('CLOCK: ', diagramClock)
+
+    // TODO diagrams are array, OCaml may need to convert these?
+
+    // TODO check if OCaml parser emits preamble
+    const gameTex = pgn2tex.convert(pgn, '{}', diagramClock)
     const gameTexWithoutPreamble = stripPreambleFromTex(gameTex)
+    console.log('gameTexWithoutPreamble: ', gameTexWithoutPreamble)
 
     fs.writeFileSync(texFilePath, gameTexWithoutPreamble)
 
