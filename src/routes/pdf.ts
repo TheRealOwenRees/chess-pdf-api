@@ -1,3 +1,7 @@
+interface IPgnParser {
+  convert: (pgn: string, diagramsString: string, diagramClock: boolean) => string
+}
+
 import { Router, Request, Response } from 'express'
 import logger from '../utils/logger'
 import fs from 'node:fs'
@@ -8,7 +12,7 @@ import { stripPreambleFromTex } from '../utils/preamble'
 import { recordMetrics } from '../utils/metrics'
 
 import * as pgnParser from '../../pgn2tex.cjs'
-const pgn2tex = pgnParser as any
+const pgn2tex = pgnParser as IPgnParser
 
 const router = Router()
 
