@@ -24,15 +24,11 @@ router.post('/', async (req: Request, res: Response) => {
   const pdfFilePath = path.join(tempDir, `game-${tempId}.pdf`)
 
   try {
-    console.log('DIAGRAMS: ', diagrams)
-    console.log('CLOCK: ', diagramClock)
-
-    // TODO diagrams are array, OCaml may need to convert these?
+    const diagramsString = JSON.stringify(diagrams)
 
     // TODO check if OCaml parser emits preamble
-    const gameTex = pgn2tex.convert(pgn, '{}', diagramClock)
+    const gameTex = pgn2tex.convert(pgn, diagramsString, diagramClock)
     const gameTexWithoutPreamble = stripPreambleFromTex(gameTex)
-    console.log('gameTexWithoutPreamble: ', gameTexWithoutPreamble)
 
     fs.writeFileSync(texFilePath, gameTexWithoutPreamble)
 
