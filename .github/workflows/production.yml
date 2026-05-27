@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Login to Github Container Registry
         run: echo "${{ secrets.GHCR_SECRET }}" | docker login ghcr.io -u ${{ env.GH_USER }} --password-stdin
