@@ -24,15 +24,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apidevtools/swagger-cli": "^4.0.4",
-    "@apidevtools/swagger-parser": "^10.1.0",
-    "@mliebelt/pgn-parser": "^1.4.12",
-    "@owenrees/pgn2tex": "^0.2.2",
-    "cors": "^2.8.6",
-    "dotenv": "^16.6.1",
-    "express": "^4.21.2",
-    "helmet": "^7.1.0",
-    "swagger-ui-express": "^5.0.0"
+    "@apidevtools/swagger-cli": "4.0.4",
+    "@apidevtools/swagger-parser": "10.1.1",
+    "@mliebelt/pgn-parser": "1.4.19",
+    "cors": "2.8.6",
+    "dotenv": "16.6.1",
+    "express": "4.22.2",
+    "helmet": "7.2.0",
+    "swagger-ui-express": "5.0.1"
   },
   "devDependencies": {
     "@mliebelt/pgn-types": "^1.0.4",
