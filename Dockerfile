@@ -21,7 +21,7 @@ COPY --from=build /usr/src/app/preambles ./preambles
 RUN npm ci --omit=dev
 
 # is the pdflatex command needed on build?
-RUN pdflatex -ini -jobname="./preambles/chess" "&pdflatex" ./preambles/chess.tex
+#RUN pdflatex -ini -jobname="./preambles/chess" "&pdflatex" ./preambles/chess.tex
 
 EXPOSE 5000
 CMD ["npm", "run", "start"]
