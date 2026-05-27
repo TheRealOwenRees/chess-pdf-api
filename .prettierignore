@@ -1,0 +1,23 @@
+# --- Dependencies ---
+node_modules/
+package-lock.json
+src/vendor/
+
+# --- OCaml / Dune Build Artifacts ---
+_build/
+*.install
+*.exe
+*.bc
+
+# --- TeX / LaTeX Generation Files ---
+*.aux
+*.log
+*.toc
+*.pdf
+*.out
+*.fls
+*.fdb_latexmk
+
+# --- Version Control & Environment ---
+.git/
+.env
