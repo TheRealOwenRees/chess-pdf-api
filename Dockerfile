@@ -1,6 +1,6 @@
 # 1. Build Stage
-# NODE v24.13.1-alpine3.22
-FROM node@sha256:d28696cabe6a72c5addbb608b344818e5a158d849174abd4b1ae85ab48536280 AS build
+# NODEv24.16.0-alpine3.23
+FROM node@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14 AS build
 WORKDIR /usr/src/app
 COPY ./package*.json ./
 COPY ./jest.config.js ./
